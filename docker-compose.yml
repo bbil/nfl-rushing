@@ -1,7 +1,7 @@
 version: "3.9"
    
 services:
-  db:
+  postgres:
     image: postgres
     environment:
       - POSTGRES_DB=postgres
@@ -14,14 +14,23 @@ services:
 
   web:
     restart: always
-    build: ./web
+    build:
+      context: ./web
+      args:
+        - SECRET_KEY=$SECRET_KEY
+        - DB_NAME=$DB_NAME
+        - DB_USER=$DB_USER
+        - DB_PASS=$DB_PASS
+        - DB_SERVER=$DB_SERVICE
+        - DB_PORT=$DB_PORT
     expose:
       - "8000"
     links:
-      - db:db
+      - postgres:postgres
     volumes:
-      - web-django:/app
+      # - web-django:/app
       - web-static:/app/static
+    env_file: .env
     environment:
       DEBUG: 'true'
     command: /usr/local/bin/gunicorn rushing.wsgi:application -w 2 -b :8000
@@ -37,7 +46,6 @@ services:
         - web:web
 
 volumes:
-  web-django:
+  # web-django:
   web-static:
   pgdata:
-  redisdata:

@@ -3,8 +3,8 @@ server {
     server_name example.org;
     charset utf-8;
 
-    location /static {
-        alias /app/static;
+    location /static/ {
+        alias /www/static/;
     }
 
     location / {
