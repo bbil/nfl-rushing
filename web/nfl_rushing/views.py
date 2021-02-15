@@ -8,8 +8,9 @@ NFL_RUSHING_PAGE_SIZE = 10
 
 def index(request):
     page_number = request.GET.get('page', 1)
+    name_filter = request.GET.get('name_filter', '')
 
-    data_query_set = fetch_nfl_rushing()
+    data_query_set = fetch_nfl_rushing(name_filter=name_filter)
     paginator = Paginator(data_query_set, NFL_RUSHING_PAGE_SIZE)
 
     try:
