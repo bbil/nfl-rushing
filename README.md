@@ -66,3 +66,13 @@ Docker, Docker compose
     3. `python manage.py migrate` -- run migration command
     4. `exit` -- exit the container
 5. navigate to `localhost:80/nfl-rushing`
+
+### High level explanation
+
+This solution runs 3 containers with docker-compose: nginx webserver, django application (backed by uwsgi), and a PostgreSQL database.
+
+Using a database so that the file does not have to be read on every request. Also, crucial for the future use of the system to handle > 10K records.
+
+A liberty of the data model was taken when I created the data migration to load the data into the database. Namely, that the `Lng` (longest rush) is a string in the json file, with a `T` ending character indicating it is a touchdown. My data model stores the longest rush as a plain integer and has a columnn to store a boolean indicating the longest rush resulted in a touchdown. The `Yds` (total rushing yards) was also a problem, as some of the values were strings and included commas.
+
+NOTE: original `rushing.json` moved to migrations folder and renamed `0002_rushing.json` to be co-located with the migration that uses the file. After the migration is run, that file is not used again.
