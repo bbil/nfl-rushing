@@ -2,8 +2,10 @@ import csv
  
 from django.views import View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+
+from .forms import FilterForm
 
 # Create your views here.
 from .data.fetch_nfl_rushing import fetch_nfl_rushing, SortOption, SortDirection
@@ -11,8 +13,6 @@ from .data.fetch_nfl_rushing import fetch_nfl_rushing, SortOption, SortDirection
 NFL_RUSHING_PAGE_SIZE = 10
 
 class IndexView(View):
-    template_name = "nfl_rushing/index.html"
-
     def _create_csv_link(self, query_dict):
         return f'/nfl-rushing/csv?{query_dict.urlencode()}'
 
@@ -87,6 +87,7 @@ class IndexView(View):
             'csv_link': self._create_csv_link(query_dict),
             'has_other_pages': page.has_other_pages(),
             'sorting_links': self._create_sorting_links(query_dict),
+            'current_name_filter': name_filter or '',
         })
 
 def download_csv(request):
@@ -120,9 +121,18 @@ def download_csv(request):
 
     return response
 
+def filter_name(request):
+    # create a form instance and populate it with data from the request:
+    form = FilterForm(request.GET)
+    # check whether it's valid:
+    if form.is_valid():
+        name_filter = form.cleaned_data['player_name']
+        return HttpResponseRedirect(f'/nfl-rushing?name_filter={name_filter}')
+    return HttpResponseRedirect(f'/nfl-rushing')
+
 def _read_query_args(request):
     page_number = request.GET.get('page', 1)
-    name_filter = request.GET.get('name_filter', '')
+    name_filter = request.GET.get('name_filter', None)
     sort_option = request.GET.get('sort_option', None)
     sort_direction = request.GET.get('sort_direction', None)
 

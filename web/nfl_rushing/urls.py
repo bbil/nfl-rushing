@@ -5,5 +5,6 @@ from . import views
 app_name = 'nfl_rushing'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
-    path('csv', views.download_csv, name='download_csv')
+    path('csv', views.download_csv, name='download_csv'),
+    path('filter-name', views.filter_name, name='filter_name'),
 ]
