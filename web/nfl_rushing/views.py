@@ -6,38 +6,66 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
-from .data.fetch_nfl_rushing import fetch_nfl_rushing
+from .data.fetch_nfl_rushing import fetch_nfl_rushing, SortOption, SortDirection
 
 NFL_RUSHING_PAGE_SIZE = 10
 
 class IndexView(View):
     template_name = "nfl_rushing/index.html"
 
-    def _read_query_args(self, request):
-        page_number = request.GET.get('page', 1)
-        name_filter = request.GET.get('name_filter', '')
+    def _create_csv_link(self, query_dict):
+        return f'/nfl-rushing/csv?{query_dict.urlencode()}'
 
-        return page_number, name_filter
-
-    def _create_csv_link(self, name_filter):
-        return f'/nfl-rushing/csv?name_filter={name_filter}'
-
-    def _create_next_page_link(self, page, name_filter):
+    def _create_next_page_link(self, page, query_dict):
         if not page.has_next():
             return None
-        
-        return f'?page={page.next_page_number()}&name_filter={name_filter}'
 
-    def _create_previous_page_link(slef, page, name_filter):
+        return f'?page={page.next_page_number()}&{query_dict.urlencode()}'
+
+    def _create_previous_page_link(self, page, query_dict):
         if not page.has_previous():
             return None
+
+        return f'?page={page.previous_page_number()}&{query_dict.urlencode()}'
+
+    def _create_sorting_links(self, query_dict):
+        query_dict = query_dict.copy()
+
+        current_sorted = None
+        current_sorted_direction_next = 'desc'
+
+        if 'sort_option' in query_dict:
+            current_sorted = query_dict['sort_option']
+            del query_dict['sort_option']
+        if 'sort_direction' in query_dict:
+            if query_dict['sort_direction'] == 'desc':
+                current_sorted_direction_next = 'inc'
+            else:
+                current_sorted_direction_next = 'desc'
+            del query_dict['sort_direction']
         
-        return f'?page={page.previous_page_number()}&name_filter={name_filter}'
+        links = {
+            'total_rushing_yards': f'?sort_option=total_rushing_yards&sort_direction=desc&{query_dict.urlencode()}',
+            'longest_rush': f'?sort_option=longest_rush&sort_direction=desc&{query_dict.urlencode()}',
+            'total_rushing_touchdowns': f'?sort_option=total_rushing_touchdowns&sort_direction=desc&{query_dict.urlencode()}'
+        }
+
+        if current_sorted:
+            links[current_sorted] = f'?sort_option={current_sorted}&sort_direction={current_sorted_direction_next}&{query_dict.urlencode()}'
+
+        return links
 
     def get(self, request):
-        page_number, name_filter = self._read_query_args(request)
+        page_number, name_filter, sort_option, sort_direction = _read_query_args(request)
+        query_dict = request.GET.copy()
+        if 'page' in query_dict:
+            del query_dict['page']
 
-        data_query_set = fetch_nfl_rushing(name_filter=name_filter)
+        data_query_set = fetch_nfl_rushing(
+            name_filter=name_filter,
+            sort_option=sort_option,
+            sort_direction=sort_direction
+        )
         paginator = Paginator(data_query_set, NFL_RUSHING_PAGE_SIZE)
 
         try:
@@ -53,17 +81,22 @@ class IndexView(View):
             'number_of_pages': paginator.num_pages,
             'total': page.count,
 
-            'next_page': self._create_next_page_link(page, name_filter),
-            'previous_page': self._create_previous_page_link(page, name_filter),
+            'next_page': self._create_next_page_link(page, query_dict),
+            'previous_page': self._create_previous_page_link(page, query_dict),
 
-            'csv_link': self._create_csv_link(name_filter),
+            'csv_link': self._create_csv_link(query_dict),
             'has_other_pages': page.has_other_pages(),
+            'sorting_links': self._create_sorting_links(query_dict),
         })
 
 def download_csv(request):
-    name_filter = request.GET.get('name_filter', '')
+    _, name_filter, sort_option, sort_direction = _read_query_args(request)
 
-    data_query_set = fetch_nfl_rushing(name_filter=name_filter)
+    data_query_set = fetch_nfl_rushing(
+       name_filter=name_filter,
+       sort_option=sort_option,
+       sort_direction=sort_direction
+    )
 
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
@@ -86,3 +119,22 @@ def download_csv(request):
         ])
 
     return response
+
+def _read_query_args(request):
+    page_number = request.GET.get('page', 1)
+    name_filter = request.GET.get('name_filter', '')
+    sort_option = request.GET.get('sort_option', None)
+    sort_direction = request.GET.get('sort_direction', None)
+
+    if sort_option:
+        try:
+            sort_option = SortOption(sort_option)
+        except ValueError:
+            sort_option = None
+    if sort_direction:
+        try:
+            sort_direction = SortDirection(sort_direction)
+        except ValueError:
+            sort_direction = None
+
+    return page_number, name_filter, sort_option, sort_direction
