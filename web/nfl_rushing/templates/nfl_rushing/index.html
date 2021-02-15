@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Nfl Rushing{% endblock %}
+
+{% block content %}
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Team</th>
+      <th>Position</th>
+      <th>Rushing Attempts</th>
+      <th>Rushing Attempts / Game</th>
+      <th>Total Rushing Yards</th>
+      <th>Rushing Yards / Game</th>
+      <th>Rushing Yards / Attempt</th>
+      <th>Rushing Touchdowns</th>
+      <th>Longest Rush</th>
+      <th>Longest Rush was a touchdown</th>
+      <th>Rush First Downs</th>
+      <th>Rush First Downs %</th>
+      <th>Rush 20+ Yards</th>
+      <th>Rush 40+ Yards</th>
+      <th>Rush Fumbles</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for player in current_page %}
+      <tr>
+        <td>{{ player.name }}</td>
+        <td>{{ player.team }}</td>
+        <td>{{ player.position }}</td>
+        <td>{{ player.rushing_attempts }}</td>
+        <td>{{ player.rushing_attempts_per_game }}</td>
+        <td>{{ player.total_rushing_yards }}</td>
+        <td>{{ player.rushing_yards_per_attempt }}</td>
+        <td>{{ player.rushing_yards_per_game }}</td>
+        <td>{{ player.total_rushing_touchdowns }}</td>
+        <td>{{ player.longest_rush }}</td>
+        <td>{{ player.longest_rush_touchdown }}</td>
+        <td>{{ player.rush_first_downs }}</td>
+        <td>{{ player.rush_first_down_percent }}</td>
+        <td>{{ player.rush_20_plus }}</td>
+        <td>{{ player.rush_40_plus }}</td>
+        <td>{{ player.rush_fumbles }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if has_other_pages %}
+  <ul class="pagination">
+    {% if previous_page %}
+      <li class="page-item"><a class="page-link" href="?page={{ previous_page }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+    {% endif %}
+    <li page-item><span class="page-link">{{ current_page_number }} of {{ number_of_pages }}</span></li>
+    {% if next_page %}
+      <li class="page-item"><a class="page-link" href="?page={{ next_page }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+{% endblock  %}
