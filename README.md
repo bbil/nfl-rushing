@@ -54,4 +54,15 @@ We will evaluate you on your ability to solve the problem defined in the require
 If you have any questions regarding requirements, do not hesitate to email your contact at theScore for clarification.
 
 ### Installation and running this solution
-... TODO
+#### Required tools
+Docker, Docker compose
+
+1. Install docker and docker-compose
+2. cd to top level of repo directory
+3. `docker-compose build`
+4. `docker-compose up --detach` (or without detach argument to see container logs)
+    1. On the first time booting the stack up, need to run migrations
+    2. `docker-compose exec web bash` -- connect to the container running the Django application
+    3. `python manage.py migrate` -- run migration command
+    4. `exit` -- exit the container
+5. navigate to `localhost:80/nfl-rushing`
