@@ -9,7 +9,7 @@ class SortOption(Enum):
     TOTAL_RUSHING_TOUCHDOWNS = 'total_rushing_touchdowns'
 
 class SortDirection(Enum):
-    INC = 'inc'
+    ASC = 'asc'
     DESC = 'desc'
 
 def fetch_nfl_rushing(name_filter=None, sort_option=None, sort_direction=None):

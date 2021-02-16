@@ -74,7 +74,7 @@ So far, I have been running the Django tests I've written on the host machine. S
 
 The tests I have right now, are more on the integration side rather than strictly unit tests, as this is what Django is readily able to do, and provides convenient utilities for loading fixture data.
 
-1. cd to `web` direction
+1. cd to `web` directory
 2. `poetry install`
 3. `./bin/test` -- runs poetry command to launch test; uses a different settings file from normal, instantiating an in-memory database instead of postgres
 

@@ -35,22 +35,24 @@ class IndexView(View):
         query_dict = query_dict.copy()
 
         current_sorted = None
-        current_sorted_direction_next = 'inc'
+        current_sorted_direction_next = SortDirection.ASC.value
 
         if 'sort_option' in query_dict:
             current_sorted = query_dict['sort_option']
             del query_dict['sort_option']
+
+        # if a sort_direction is already set; generate the opposite direction for that sort_option
         if 'sort_direction' in query_dict:
-            if query_dict['sort_direction'] == 'desc':
-                current_sorted_direction_next = 'inc'
+            if query_dict['sort_direction'] == SortDirection.DESC.value:
+                current_sorted_direction_next = SortDirection.ASC.value
             else:
-                current_sorted_direction_next = 'desc'
+                current_sorted_direction_next = SortDirection.DESC.value
             del query_dict['sort_direction']
         
         links = {
-            'total_rushing_yards': f'?sort_option=total_rushing_yards&sort_direction=desc&{query_dict.urlencode()}',
-            'longest_rush': f'?sort_option=longest_rush&sort_direction=desc&{query_dict.urlencode()}',
-            'total_rushing_touchdowns': f'?sort_option=total_rushing_touchdowns&sort_direction=desc&{query_dict.urlencode()}'
+            SortOption.TOTAL_RUSHING_YARDS.value: f'?sort_option=total_rushing_yards&sort_direction=desc&{query_dict.urlencode()}',
+            SortOption.LONGEST_RUSH.value: f'?sort_option=longest_rush&sort_direction=desc&{query_dict.urlencode()}',
+            SortOption.TOTAL_RUSHING_TOUCHDOWNS.value: f'?sort_option=total_rushing_touchdowns&sort_direction=desc&{query_dict.urlencode()}'
         }
         
         # if there is currently sorting happening on one of the columns, set its url to be the reverse
@@ -125,9 +127,7 @@ def download_csv(request):
 # View invoked by the <form>
 # simply redirects to the main index view
 def filter_name(request):
-    # create a form instance and populate it with data from the request:
     form = FilterForm(request.GET)
-    # check whether it's valid:
     if form.is_valid():
         name_filter = form.cleaned_data['player_name']
         return HttpResponseRedirect(f'/nfl-rushing?name_filter={name_filter}')

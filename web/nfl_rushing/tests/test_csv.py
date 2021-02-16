@@ -54,7 +54,7 @@ class TestCsvDownload(TestCase):
             'nfl_rushing:download_csv',
             query_kwargs={
                 'sort_option': 'longest_rush',
-                'sort_direction': 'inc'
+                'sort_direction': 'asc'
             }
         )
         response = self.client.get(url)

@@ -52,7 +52,7 @@ class TestIndexDataQuerying(TestCase):
             'nfl_rushing:index',
             query_kwargs={
                 'sort_option': 'total_rushing_yards',
-                'sort_direction': 'inc'
+                'sort_direction': 'asc'
             }
         )
         response = self.client.get(url)
@@ -100,7 +100,7 @@ class TestIndexDataQuerying(TestCase):
             'nfl_rushing:index',
             query_kwargs={
                 'sort_option': 'longest_rush',
-                'sort_direction': 'inc'
+                'sort_direction': 'asc'
             }
         )
         response = self.client.get(url)
@@ -131,7 +131,7 @@ class TestIndexDataQuerying(TestCase):
             'nfl_rushing:index',
             query_kwargs={
                 'sort_option': 'total_rushing_touchdowns',
-                'sort_direction': 'inc',
+                'sort_direction': 'asc',
             }
         )
         response = self.client.get(url)
@@ -170,7 +170,7 @@ class TestIndexSortingLinks(TestCase):
 
         expected_sorting_links = {
             # sort_direction for the next time total_rushing_yards link is clicked should be inc
-            'total_rushing_yards': '?sort_option=total_rushing_yards&sort_direction=inc&',
+            'total_rushing_yards': '?sort_option=total_rushing_yards&sort_direction=asc&',
             'longest_rush': '?sort_option=longest_rush&sort_direction=desc&',
             'total_rushing_touchdowns': '?sort_option=total_rushing_touchdowns&sort_direction=desc&'
         }
@@ -182,7 +182,7 @@ class TestIndexSortingLinks(TestCase):
             'nfl_rushing:index',
             query_kwargs={
                 'sort_option': 'total_rushing_yards',
-                'sort_direction': 'inc'
+                'sort_direction': 'asc'
             }
         )
         response = self.client.get(url)
@@ -206,7 +206,7 @@ class TestCsvLink(TestCase):
             'nfl_rushing:index',
             query_kwargs={
                 'sort_option': 'total_rushing_yards',
-                'sort_direction': 'inc',
+                'sort_direction': 'asc',
                 'name_filter': 'bob',
                 'page': 23,
             }
@@ -215,7 +215,7 @@ class TestCsvLink(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-        expected_url = '/nfl-rushing/csv?sort_option=total_rushing_yards&sort_direction=inc&name_filter=bob'
+        expected_url = '/nfl-rushing/csv?sort_option=total_rushing_yards&sort_direction=asc&name_filter=bob'
         self.assertEqual(response.context['csv_link'], expected_url)
 
 class TestPagination(TestCase):
