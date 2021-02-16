@@ -7,11 +7,14 @@ from django.shortcuts import render
 
 from .forms import FilterForm
 
-# Create your views here.
 from .data.fetch_nfl_rushing import fetch_nfl_rushing, SortOption, SortDirection
 
 NFL_RUSHING_PAGE_SIZE = 10
 
+# Main view, responsible for:
+# - querying the data, based on the query arguments
+# - setting up urls to be used by anchor tags: sorting/pagination
+# - gathering context and sending to the template to be rendered
 class IndexView(View):
     def _create_csv_link(self, query_dict):
         return f'/nfl-rushing/csv?{query_dict.urlencode()}'
@@ -49,7 +52,9 @@ class IndexView(View):
             'longest_rush': f'?sort_option=longest_rush&sort_direction=desc&{query_dict.urlencode()}',
             'total_rushing_touchdowns': f'?sort_option=total_rushing_touchdowns&sort_direction=desc&{query_dict.urlencode()}'
         }
-
+        
+        # if there is currently sorting happening on one of the columns, set its url to be the reverse
+        # of what it currently is
         if current_sorted:
             links[current_sorted] = f'?sort_option={current_sorted}&sort_direction={current_sorted_direction_next}&{query_dict.urlencode()}'
 
@@ -90,6 +95,9 @@ class IndexView(View):
             'current_name_filter': name_filter or '',
         })
 
+# View that allows for downloading a CSV file based on the current arguments
+# does not render a new view, because of the Content-Disposition header
+# the browser will save the resulting CSV file to Downloads
 def download_csv(request):
     _, name_filter, sort_option, sort_direction = _read_query_args(request)
 
@@ -121,6 +129,8 @@ def download_csv(request):
 
     return response
 
+# View invoked by the <form>
+# simply redirects to the main index view
 def filter_name(request):
     # create a form instance and populate it with data from the request:
     form = FilterForm(request.GET)
@@ -130,6 +140,7 @@ def filter_name(request):
         return HttpResponseRedirect(f'/nfl-rushing?name_filter={name_filter}')
     return HttpResponseRedirect(f'/nfl-rushing')
 
+# Helper to read common arguments from the request and do processing to create instances of the Enums
 def _read_query_args(request):
     page_number = request.GET.get('page', 1)
     name_filter = request.GET.get('name_filter', None)

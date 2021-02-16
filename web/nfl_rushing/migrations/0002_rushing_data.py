@@ -5,9 +5,10 @@ import os
 
 import json
 
+JSON_FILE_NAME = os.path.dirname(__file__) + '/0002_rushing.json'
+
 def insert_rushing_data(apps, schema_editor):
-    # with open(os.path.dirname(__file__) + "/0003_data_file.csv", "r") as csvfile:
-    with open(os.path.dirname(__file__) + '/0002_rushing.json') as f:
+    with open(JSON_FILE_NAME) as f:
         data = json.load(f)
 
     NflPlayerRushing = apps.get_model('nfl_rushing', 'NflPlayerRushing')
