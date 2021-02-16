@@ -7,7 +7,7 @@ from django.shortcuts import render
 
 from .forms import FilterForm
 
-from .data.fetch_nfl_rushing import fetch_nfl_rushing, SortOption, SortDirection
+from .data.fetch_nfl_rushing import fetch_nfl_rushing, SortOption, SortDirection, write_to_csv
 
 NFL_RUSHING_PAGE_SIZE = 10
 
@@ -35,7 +35,7 @@ class IndexView(View):
         query_dict = query_dict.copy()
 
         current_sorted = None
-        current_sorted_direction_next = 'desc'
+        current_sorted_direction_next = 'inc'
 
         if 'sort_option' in query_dict:
             current_sorted = query_dict['sort_option']
@@ -81,17 +81,24 @@ class IndexView(View):
             page = paginator.page(paginator.num_pages)
     
         return render(request, 'nfl_rushing/index.html', {
+            # NflPlayerRushing objects to render
             'current_page': page.object_list,
+
+            # pagination info/links
             'current_page_number': page.number,
             'number_of_pages': paginator.num_pages,
-            'total': page.count,
-
+            'has_other_pages': page.has_other_pages(),
             'next_page': self._create_next_page_link(page, query_dict),
             'previous_page': self._create_previous_page_link(page, query_dict),
+            'total': page.count,
 
+            # link to download the csv
             'csv_link': self._create_csv_link(query_dict),
-            'has_other_pages': page.has_other_pages(),
+
+            # links for all the sorting
             'sorting_links': self._create_sorting_links(query_dict),
+
+            # current filter to render into form input
             'current_name_filter': name_filter or '',
         })
 
@@ -112,21 +119,7 @@ def download_csv(request):
     response['Content-Disposition'] = 'attachment; filename="nfl_rushing.csv"'
 
     writer = csv.writer(response)
-    writer.writerow([
-        'Name', 'Team', 'Position', 'Rushing Attempts', 'Rushing attempts per game',
-        'Total rushing yards', 'Rushing yards per attempt', 'Rushing yards per game',
-        'Total rushing touchdowns', 'Longest Rush', 'Longest rush was touchdown',
-        'Rush first downs', 'Rush first down %', 'Rush 20+ yards', 'Rush 40+ yards', 'Rush fumbles'
-    ])
-    for player in data_query_set:
-        writer.writerow([
-            player.name, player.team, player.position, player.rushing_attempts,
-            player.rushing_attempts_per_game, player.total_rushing_yards, player.rushing_yards_per_attempt,
-            player.rushing_yards_per_game, player.total_rushing_touchdowns, player.longest_rush,
-            str(player.longest_rush_touchdown).lower(), player.rush_first_downs, player.rush_first_down_percent,
-            player.rush_20_plus, player.rush_40_plus, player.rush_fumbles
-        ])
-
+    write_to_csv(writer, data_query_set)
     return response
 
 # View invoked by the <form>

@@ -28,7 +28,6 @@ services:
     links:
       - postgres:postgres
     volumes:
-      # - web-django:/app
       - web-static:/app/static
     env_file: .env
     environment:
@@ -46,6 +45,5 @@ services:
         - web:web
 
 volumes:
-  # web-django:
   web-static:
   pgdata:

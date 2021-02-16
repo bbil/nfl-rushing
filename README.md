@@ -67,9 +67,20 @@ Docker, Docker compose
     4. `exit` -- exit the container
 5. navigate to `localhost:80/nfl-rushing`
 
+#### Testing
+Required: poetry -- https://python-poetry.org/docs/#installation
+
+So far, I have been running the Django tests I've written on the host machine. So, you need the dependencies installed via poetry locally (it is automatically in a virtualenv).
+
+The tests I have right now, are more on the integration side rather than strictly unit tests, as this is what Django is readily able to do, and provides convenient utilities for loading fixture data.
+
+1. cd to `web` direction
+2. `poetry install`
+3. `./bin/test` -- runs poetry command to launch test; uses a different settings file from normal, instantiating an in-memory database instead of postgres
+
 ### High level explanation
 
-This solution runs 3 containers with docker-compose: nginx webserver, django application (backed by uwsgi), and a PostgreSQL database.
+This solution runs 3 containers with docker-compose: nginx webserver, django application (backed by gunicorn), and a PostgreSQL database.
 
 Using a database so that the file does not have to be read on every request. Also, crucial for the future use of the system to handle > 10K records.
 

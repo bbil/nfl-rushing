@@ -1,0 +1,68 @@
+[
+    {
+        "model":"nfl_rushing.nflplayerrushing",
+        "pk": 1,
+        "fields": {
+            "name": "Person 1",
+            "team": "A",
+            "position": "QB",
+            "rushing_attempts": 0,
+            "rushing_attempts_per_game": 0.0,
+            "total_rushing_yards": 0,
+            "rushing_yards_per_attempt": 0,
+            "rushing_yards_per_game": 0.0,
+            "total_rushing_touchdowns": 2,
+            "longest_rush": 1,
+            "longest_rush_touchdown": false,
+            "rush_first_downs": 0,
+            "rush_first_down_percent": 0.0,
+            "rush_20_plus": 0,
+            "rush_40_plus": 0,
+            "rush_fumbles": 0
+        }
+    },
+    {
+        "model":"nfl_rushing.nflplayerrushing",
+        "pk": 2,
+        "fields": {
+            "name": "Person 2",
+            "team": "B",
+            "position": "QB",
+            "rushing_attempts": 1,
+            "rushing_attempts_per_game": 1.0,
+            "total_rushing_yards": 1,
+            "rushing_yards_per_attempt": 1,
+            "rushing_yards_per_game": 1.1,
+            "total_rushing_touchdowns": 1,
+            "longest_rush": 0,
+            "longest_rush_touchdown": false,
+            "rush_first_downs": 1,
+            "rush_first_down_percent": 1.0,
+            "rush_20_plus": 1,
+            "rush_40_plus": 1,
+            "rush_fumbles": 1
+        }
+    },
+    {
+        "model":"nfl_rushing.nflplayerrushing",
+        "pk": 3,
+        "fields": {
+            "name": "Person 3",
+            "team": "C",
+            "position": "QB",
+            "rushing_attempts": 2,
+            "rushing_attempts_per_game": 2.0,
+            "total_rushing_yards": 2,
+            "rushing_yards_per_attempt": 2,
+            "rushing_yards_per_game": 2.0,
+            "total_rushing_touchdowns": 0,
+            "longest_rush": 2,
+            "longest_rush_touchdown": false,
+            "rush_first_downs": 2,
+            "rush_first_down_percent": 2.0,
+            "rush_20_plus": 2,
+            "rush_40_plus": 2,
+            "rush_fumbles": 2
+        }
+    }
+]
