@@ -65,12 +65,12 @@ Docker, Docker compose
     2. `docker-compose exec web bash` -- connect to the container running the Django application
     3. `python manage.py migrate` -- run migration command
     4. `exit` -- exit the container
-5. navigate to `localhost:80/nfl-rushing`
+5. navigate to `localhost:80/nfl-rushing`, to use the original solution I created. Which uses regular Django views and the Django template system. Continue to the front end section to run the independent react application.
 
-#### Front end
-The front end is a React application, created with Create React App (using the TypeScript template).
+#### React Front end
+The front end is a React application, created with Create React App (using the TypeScript template). This uses a REST api that the Django server exposes.
 
-Core libraries: Redux, React-Redux, Redux-Thunk, Typesafe Actions
+Core libraries: Redux, React-Redux, Redux-Thunk, Typesafe Actions, Axios
 ##### Required tools
 Yarn
 
@@ -106,3 +106,6 @@ NOTE: original `rushing.json` moved to migrations folder and renamed `0002_rushi
 - indexes on columns used in sorting/filtering
   - very easy to add with Django migrations
 - if dataset becomes very large and the CSV cannot be generated in-memory in a timely fashion, use asyncronous processing (Celery is the standard for Django) to offload creating the CSV. Return a url where the finished file will be found (some other storage, like S3)
+- CORS
+  - Currently setting CORS_ALLOW_ALL_ORIGINS in order to allow the React app to make AJAX requests to the backend API
+  - This is normal for local development, but for a real production API, would want to limit to URLs under a certain domain. e.g. `*.thescore.com` -- api located at `api.thescore.com`, and frontend at `nfl.thescore.com`
