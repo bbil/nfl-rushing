@@ -68,12 +68,17 @@ Docker, Docker compose
 5. navigate to `localhost:80/nfl-rushing`
 
 #### Front end
+The front end is a React application, created with Create React App (using the TypeScript template).
+
+Core libraries: Redux, React-Redux, Redux-Thunk, Typesafe Actions
 ##### Required tools
 Yarn
 
 1. cd into front-end directory
 2. `yarn install` to install javascript dependencies
 3. `yarn run start` to start a webpack dev server
+
+NOTE: If you choose to run the docker-compose under a docker-machine -- may need to change `front-end/src/constants.ts` to the docker-machine env ip address. Currently it is assuming the server is addressable from `http://localhost:80`. So far, I have only been using the native docker driver on Linux.
 
 #### Server Tests
 Required: poetry -- https://python-poetry.org/docs/#installation
