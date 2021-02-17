@@ -67,7 +67,15 @@ Docker, Docker compose
     4. `exit` -- exit the container
 5. navigate to `localhost:80/nfl-rushing`
 
-#### Testing
+#### Front end
+##### Required tools
+Yarn
+
+1. cd into front-end directory
+2. `yarn install` to install javascript dependencies
+3. `yarn run start` to start a webpack dev server
+
+#### Server Tests
 Required: poetry -- https://python-poetry.org/docs/#installation
 
 So far, I have been running the Django tests I've written on the host machine. So, you need the dependencies installed via poetry locally (it is automatically in a virtualenv).
