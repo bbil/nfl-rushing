@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { BASE_URL } from '../../constants';
 
-import { setData, setFilter, setSort } from "./actions";
+import { removeFilter, removeSort, setData, setFilter, setSort } from "./actions";
 import { getApiQueryParams } from './selectors';
 import { ApiNflRushingDataItem, ApiQueryParams, NflRushingDataItem, SortDirection, SortOption } from "./types";
 
@@ -33,7 +34,7 @@ function mapApiData(rawData: ApiNflRushingDataItem[]): NflRushingDataItem[] {
 }
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:80'
+    baseURL: BASE_URL
 });
 
 async function doFetch(params: ApiQueryParams, dispatch: Function) {
@@ -69,8 +70,22 @@ export const applyFilter = (nameFilter: string) => async (dispatch: Function, ge
     await doFetch(params, dispatch);
 };
 
-export const sorting = (sortOption: SortOption, sortDirection: SortDirection) => async (dispatch: Function, getState: any) => {
+export const clearFilter = () => async (dispatch: Function, getState: any) => {
+    dispatch(removeFilter());
+
+    const params = getApiQueryParams(getState());
+    await doFetch(params, dispatch);
+};
+
+export const applySort = (sortOption: SortOption, sortDirection: SortDirection) => async (dispatch: Function, getState: any) => {
     dispatch(setSort(sortOption, sortDirection));
+
+    const params = getApiQueryParams(getState());
+    await doFetch(params, dispatch);
+};
+
+export const clearSort = () => async (dispatch: Function, getState: any) => {
+    dispatch(removeSort());
 
     const params = getApiQueryParams(getState());
     await doFetch(params, dispatch);

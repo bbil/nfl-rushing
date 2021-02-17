@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getCsvLink } from '../../redux/rushing/selectors';
 import { State } from '../../redux/store';
 import { Filter } from './filter';
+import { Sorting } from './sorting';
 
 interface InputsProps {
     csvLink: string;
@@ -11,8 +12,17 @@ interface InputsProps {
 const InputsComponent: React.FC<InputsProps> = props => {
     return (
         <div className="container-fluid">
-            <Filter />
-            <a href={props.csvLink}>Download CSV</a>
+            <div className="row">
+                <div className="col">
+                    <Filter />
+                </div>
+                <div className="col">
+                    <Sorting />
+                </div>
+                <div className="col">
+                    <a href={props.csvLink}>Download CSV</a>
+                </div>
+            </div>
         </div>
     );
 };

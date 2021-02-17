@@ -30,6 +30,12 @@ const reducer: Reducer<RushingState, Actions> = (state = DEFAULT_STATE, action) 
                 nameFilter: action.payload.filter,
                 pageNumber: 1
             };
+        case getType(actions.removeFilter):
+            return {
+                ...state,
+                nameFilter: null,
+                pageNumber: 1
+            }
         case getType(actions.setSort):
             return {
                 ...state,
@@ -37,6 +43,13 @@ const reducer: Reducer<RushingState, Actions> = (state = DEFAULT_STATE, action) 
                 sortOption: action.payload.sortOption,
                 pageNumber: 1
             };
+        case getType(actions.removeSort):
+            return {
+                ...state,
+                sortDirection: null,
+                sortOption: null,
+                pageNumber: 1
+            }
         
         default:
             return state;

@@ -1,3 +1,4 @@
+import { BASE_URL } from "../../constants";
 import { State } from "../store";
 import { ApiQueryParams, NflRushingDataItem } from "./types";
 
@@ -42,7 +43,22 @@ export const getCsvLink = (state: State): string => {
         obj['name_filter'] = state.rushing.nameFilter;
     }
 
+    if (state.rushing.sortDirection) {
+        obj['sort_direction'] = state.rushing.sortDirection;
+    }
+
+    if (state.rushing.sortOption) {
+        obj['sort_option'] = state.rushing.sortOption;
+    }
+
     // @ts-ignore
     const queryString = new URLSearchParams(obj).toString();
-    return `http://localhost:80/nfl-rushing/csv?${queryString}`;
+    return `${BASE_URL}/nfl-rushing/csv?${queryString}`;
+}
+
+export const getSorting = (state: State) => {
+    return {
+        sortDirection: state.rushing.sortDirection,
+        sortOption: state.rushing.sortOption
+    }
 }

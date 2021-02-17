@@ -9,6 +9,10 @@ export const setSort = createAction('rushing/SET_SORT', action =>
     (sortOption: SortOption, sortDirection: SortDirection) => action({ sortOption, sortDirection })
 );
 
+export const removeSort = createAction('rushing/REMOVE_SORT');
+
 export const setFilter = createAction('rushing/SET_FILTER', action =>
     (filter: string) => action({ filter })
 );
+
+export const removeFilter = createAction('rushing/REMOVE_FILTER');
