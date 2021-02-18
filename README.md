@@ -67,6 +67,17 @@ Docker, Docker compose
     4. `exit` -- exit the container
 5. navigate to `localhost:80/nfl-rushing`, to use the original solution I created. Which uses regular Django views and the Django template system. Continue to the front end section to run the independent react application.
 
+#### Server Tests
+Required: poetry -- https://python-poetry.org/docs/#installation
+
+So far, I have been running the Django tests I've written on the host machine. So, you need the dependencies installed via poetry locally (it is automatically in a virtualenv).
+
+The tests I have right now, are more on the integration side rather than strictly unit tests, as this is what Django is readily able to do, and provides convenient utilities for loading fixture data.
+
+1. cd to `web` directory
+2. `poetry install`
+3. `./bin/test` -- runs poetry command to launch test; uses a different settings file from normal, instantiating an in-memory database instead of postgres
+
 #### React Front end
 The front end is a React application, created with Create React App (using the TypeScript template). This uses a REST api that the Django server exposes.
 
@@ -80,16 +91,19 @@ Yarn
 
 NOTE: If you choose to run the docker-compose under a docker-machine -- may need to change `front-end/src/constants.ts` to the docker-machine env ip address. Currently it is assuming the server is addressable from `http://localhost:80`. So far, I have only been using the native docker driver on Linux.
 
-#### Server Tests
-Required: poetry -- https://python-poetry.org/docs/#installation
+#### Front End Tests
+Required: yarn
 
-So far, I have been running the Django tests I've written on the host machine. So, you need the dependencies installed via poetry locally (it is automatically in a virtualenv).
+1. cd to front-end directory
+2. `yarn test`
 
-The tests I have right now, are more on the integration side rather than strictly unit tests, as this is what Django is readily able to do, and provides convenient utilities for loading fixture data.
-
-1. cd to `web` directory
-2. `poetry install`
-3. `./bin/test` -- runs poetry command to launch test; uses a different settings file from normal, instantiating an in-memory database instead of postgres
+Should see output like this at the end, if the number of tests is lower than this, may need to hit `a` to run all tests (jest will be in watch mode at this point)
+```
+Test Suites: 12 passed, 12 total
+Tests:       41 passed, 41 total
+Snapshots:   16 passed, 16 total
+Time:        2.938 s, estimated 3 s
+```
 
 ### High level explanation
 
