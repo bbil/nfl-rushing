@@ -9,6 +9,8 @@ from .forms import FilterForm
 
 from .data.fetch_nfl_rushing import fetch_nfl_rushing, SortOption, SortDirection, write_to_csv
 
+from .view_helpers import read_query_args
+
 NFL_RUSHING_PAGE_SIZE = 10
 
 # Main view, responsible for:
@@ -63,7 +65,7 @@ class IndexView(View):
         return links
 
     def get(self, request):
-        page_number, name_filter, sort_option, sort_direction = _read_query_args(request)
+        page_number, name_filter, sort_option, sort_direction = read_query_args(request)
         query_dict = request.GET.copy()
         if 'page' in query_dict:
             del query_dict['page']
@@ -108,7 +110,7 @@ class IndexView(View):
 # does not render a new view, because of the Content-Disposition header
 # the browser will save the resulting CSV file to Downloads
 def download_csv(request):
-    _, name_filter, sort_option, sort_direction = _read_query_args(request)
+    _, name_filter, sort_option, sort_direction = read_query_args(request)
 
     data_query_set = fetch_nfl_rushing(
        name_filter=name_filter,
@@ -132,23 +134,3 @@ def filter_name(request):
         name_filter = form.cleaned_data['player_name']
         return HttpResponseRedirect(f'/nfl-rushing?name_filter={name_filter}')
     return HttpResponseRedirect(f'/nfl-rushing')
-
-# Helper to read common arguments from the request and do processing to create instances of the Enums
-def _read_query_args(request):
-    page_number = request.GET.get('page', 1)
-    name_filter = request.GET.get('name_filter', None)
-    sort_option = request.GET.get('sort_option', None)
-    sort_direction = request.GET.get('sort_direction', None)
-
-    if sort_option:
-        try:
-            sort_option = SortOption(sort_option)
-        except ValueError:
-            sort_option = None
-    if sort_direction:
-        try:
-            sort_direction = SortDirection(sort_direction)
-        except ValueError:
-            sort_direction = None
-
-    return page_number, name_filter, sort_option, sort_direction
