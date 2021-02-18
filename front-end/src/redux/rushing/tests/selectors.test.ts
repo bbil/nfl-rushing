@@ -123,7 +123,7 @@ describe('rushing selectors', () => {
             };
 
             expect(selectors.getCsvLink(state)).toEqual(
-                'http://localhost:80/nfl-rushing/csv?sort_direction=total_rushing_touchdowns&sort_option=total_rushing_touchdowns&name_filter=name'
+                'http://localhost:80/nfl-rushing/csv?sort_direction=ascs&sort_option=total_rushing_touchdowns&name_filter=name'
             );
         });
     });

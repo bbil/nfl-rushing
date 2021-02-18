@@ -32,7 +32,7 @@ export const getCsvLink = (state: State): string => {
     const obj: any = {};
 
     if (state.rushing.sortDirection) {
-        obj['sort_direction'] = state.rushing.sortOption;
+        obj['sort_direction'] = state.rushing.sortDirection;
     }
 
     if (state.rushing.sortOption) {
