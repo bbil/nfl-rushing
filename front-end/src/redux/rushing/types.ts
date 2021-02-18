@@ -1,30 +1,4 @@
 
-export interface ApiNflRushingDataItem {
-    name: string;
-    team: string;
-    position: string;
-
-    rushing_attempts: number;
-    rushing_attempts_per_game: number;
-    
-    total_rushing_yards: number;
-    rushing_yards_per_attempt: number;
-    rushing_yards_per_game: number;
-
-    total_rushing_touchdowns: number;
-
-    longest_rush: number;
-    longest_rush_touchdown: boolean;
-
-    rush_first_downs: number;
-    rush_first_down_percent: number;
-
-    rush_20_plus: number;
-    rush_40_plus: number;
-
-    rush_fumbles: number;
-}
-
 export interface NflRushingDataItem {
     name: string;
     team: string;

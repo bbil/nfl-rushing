@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination component is null if no next page or previous page 1`] = `""`;
+
+exports[`Pagination component renders with only both enabled 1`] = `
+<div
+  className="pagination"
+>
+  <button
+    disabled={false}
+    onClick={[MockFunction]}
+  >
+    Previous
+  </button>
+  <button
+    disabled={false}
+    onClick={[MockFunction]}
+  >
+    Next
+  </button>
+</div>
+`;
+
+exports[`Pagination component renders with only next page enabled 1`] = `
+<div
+  className="pagination"
+>
+  <button
+    disabled={true}
+    onClick={[MockFunction]}
+  >
+    Previous
+  </button>
+  <button
+    disabled={false}
+    onClick={[MockFunction]}
+  >
+    Next
+  </button>
+</div>
+`;
+
+exports[`Pagination component renders with only previous page enabled 1`] = `
+<div
+  className="pagination"
+>
+  <button
+    disabled={false}
+    onClick={[MockFunction]}
+  >
+    Previous
+  </button>
+  <button
+    disabled={true}
+    onClick={[MockFunction]}
+  >
+    Next
+  </button>
+</div>
+`;

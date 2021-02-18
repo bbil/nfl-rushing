@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { applyFilter, clearFilter } from '../../redux/rushing/thunk';
 
-interface FIlterProps {
+export interface FilterProps {
     setFilter: (filter: string) => void;
     clearFilter: () => void;
 }
 
-const FilterComponent: React.FC<FIlterProps> = props => {
+export const FilterComponent: React.FC<FilterProps> = props => {
     const [nameFilter, setNameFilter] = React.useState<string>('');
     const onNameFilterChange = React.useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,9 +22,9 @@ const FilterComponent: React.FC<FIlterProps> = props => {
     return (
         <div>
             <h3>Player Name Filter:</h3>
-            <input value={nameFilter} onChange={onNameFilterChange} />
-            <button disabled={!nameFilter} onClick={() => props.setFilter(nameFilter)}>OK</button>
-            <button onClick={clearFilter}>Clear Filter</button>
+            <input id='filter-input' value={nameFilter} onChange={onNameFilterChange} />
+            <button id='filter-ok' disabled={!nameFilter} onClick={() => props.setFilter(nameFilter)}>OK</button>
+            <button id='filter-clear' onClick={clearFilter}>Clear Filter</button>
         </div>
     );
 };

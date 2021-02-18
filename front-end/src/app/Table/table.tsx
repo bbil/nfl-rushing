@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { getData } from '../../redux/rushing/selectors';
-import { fetchData } from '../../redux/rushing/thunk';
+import { initialFetch } from '../../redux/rushing/thunk';
 import { NflRushingDataItem } from '../../redux/rushing/types';
 import { State } from '../../redux/store';
 import { Pagination } from './pagination';
@@ -15,9 +15,9 @@ interface TableStateProps {
     nflRushingData: NflRushingDataItem[];
 }
 
-type TableProps = TableDispatchProps & TableStateProps;
+export type TableProps = TableDispatchProps & TableStateProps;
 
-const TableComponent: React.FC<TableProps> = props => {
+export const TableComponent: React.FC<TableProps> = props => {
     // on mount; load first-time data
     React.useEffect(() => {
         props.fetchData();
@@ -36,7 +36,7 @@ const TableComponent: React.FC<TableProps> = props => {
 
 function mapDispatchToProps(dispatch: Function): TableDispatchProps {
     return {
-        fetchData: () => dispatch(fetchData())
+        fetchData: () => dispatch(initialFetch())
     }
 }
 
@@ -48,7 +48,7 @@ function mapStateToProps(state: State): TableStateProps {
 
 export const Table = connect(mapStateToProps, mapDispatchToProps)(TableComponent);
 
-const TableHead: React.FC = () => (
+export const TableHead: React.FC = () => (
   <thead>
     <tr>
       <th>Name</th>
@@ -56,13 +56,10 @@ const TableHead: React.FC = () => (
       <th>Position</th>
       <th>Rushing Attempts</th>
       <th>Rushing Attempts / Game</th>
-      {/* Sorting */}
       <th>Total Rushing Yards</th>
       <th>Rushing Yards / Game</th>
       <th>Rushing Yards / Attempt</th>
-      {/* Sorting */}
       <th>Rushing Touchdowns</th>
-      {/* Sorting */}
       <th>Longest Rush</th>
       <th>Longest Rush was a touchdown</th>
       <th>Rush First Downs</th>
@@ -74,8 +71,8 @@ const TableHead: React.FC = () => (
   </thead>
 );
 
-type TableBodyProps = { data: NflRushingDataItem[] };
-const TableBody: React.FC<TableBodyProps> = ({ data }) => (
+export type TableBodyProps = { data: NflRushingDataItem[] };
+export const TableBody: React.FC<TableBodyProps> = ({ data }) => (
   <tbody>
     {data.map(player => {
         return (

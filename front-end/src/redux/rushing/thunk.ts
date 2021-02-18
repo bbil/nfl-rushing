@@ -1,51 +1,23 @@
-import axios from 'axios';
-import { BASE_URL } from '../../constants';
 
+import { fetchRushingStats } from "../../api";
 import { removeFilter, removeSort, setData, setFilter, setSort } from "./actions";
 import { getApiQueryParams } from './selectors';
-import { ApiNflRushingDataItem, ApiQueryParams, NflRushingDataItem, SortDirection, SortOption } from "./types";
+import { ApiQueryParams, SortDirection, SortOption } from "./types";
 
-function mapApiData(rawData: ApiNflRushingDataItem[]): NflRushingDataItem[] {
-    return rawData.map(raw => ({
-        name: raw.name,
-        team: raw.team,
-        position: raw.position,
-
-        rushingAttempts: raw.rushing_attempts,
-        rushingAttemptsPerGame: raw.rushing_attempts_per_game,
-        
-        totalRushingYards: raw.total_rushing_yards,
-        rushingYardsPerAttempt: raw.rushing_yards_per_attempt,
-        rushingYardsPerGame: raw.rushing_yards_per_game,
-
-        totalRushingTouchdowns: raw.total_rushing_touchdowns,
-
-        longestRush: raw.longest_rush,
-        longestRushTouchdown: raw.longest_rush_touchdown,
-
-        rushFirstDowns: raw.rush_first_downs,
-        rushFirstDownPercent: raw.rush_first_down_percent,
-
-        rush20Plus: raw.rush_20_plus,
-        rush40Plus: raw.rush_40_plus,
-
-        rushFumbles: raw.rush_fumbles,
-    }));
+/**
+ * Helper that calls to api, and dispatches action to set data in redux
+ * @param params 
+ * @param dispatch 
+ */
+export async function doFetch(params: ApiQueryParams, dispatch: Function) {
+    const rushingStats = await fetchRushingStats(params);
+    dispatch(setData(rushingStats.data, rushingStats.pageNumber, rushingStats.numberOfPages));
 }
 
-const axiosInstance = axios.create({
-    baseURL: BASE_URL
-});
-
-async function doFetch(params: ApiQueryParams, dispatch: Function) {
-    const response = await axiosInstance.get('nfl-rushing/api', { params });
-    const realData = mapApiData(response.data.data);
-    dispatch(setData(realData, response.data.page_number, response.data.num_pages));
-}
-
-export const fetchData = () => async (dispatch: Function, getState: any) => {
+export const initialFetch = () => async (dispatch: Function, getState: any) => {
     const params = getApiQueryParams(getState());
-    await doFetch(params, dispatch);
+
+    await exports.doFetch(params, dispatch);
 };
 
 export const nextPage = () => async (dispatch: Function, getState: any) => {
@@ -53,40 +25,40 @@ export const nextPage = () => async (dispatch: Function, getState: any) => {
 
     params.page += 1;
 
-    await doFetch(params, dispatch);
+    await exports.doFetch(params, dispatch);
 };
 
 export const previousPage = () => async (dispatch: Function, getState: any) => {
     const params = getApiQueryParams(getState());
     params.page -= 1;
 
-    await doFetch(params, dispatch);
+    await exports.doFetch(params, dispatch);
 };
 
 export const applyFilter = (nameFilter: string) => async (dispatch: Function, getState: any) => {
     dispatch(setFilter(nameFilter));
 
     const params = getApiQueryParams(getState());
-    await doFetch(params, dispatch);
+    await exports.doFetch(params, dispatch);
 };
 
 export const clearFilter = () => async (dispatch: Function, getState: any) => {
     dispatch(removeFilter());
 
     const params = getApiQueryParams(getState());
-    await doFetch(params, dispatch);
+    await exports.doFetch(params, dispatch);
 };
 
 export const applySort = (sortOption: SortOption, sortDirection: SortDirection) => async (dispatch: Function, getState: any) => {
     dispatch(setSort(sortOption, sortDirection));
 
     const params = getApiQueryParams(getState());
-    await doFetch(params, dispatch);
+    await exports.doFetch(params, dispatch);
 };
 
 export const clearSort = () => async (dispatch: Function, getState: any) => {
     dispatch(removeSort());
 
     const params = getApiQueryParams(getState());
-    await doFetch(params, dispatch);
+    await exports.doFetch(params, dispatch);
 };

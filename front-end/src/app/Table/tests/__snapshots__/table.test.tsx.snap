@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table Component renders 1`] = `
+<Fragment>
+  <table
+    className="table table-bordered table-striped"
+  >
+    <TableHead />
+    <TableBody
+      data={Array []}
+    />
+  </table>
+  <Connect(PaginationComponent) />
+</Fragment>
+`;

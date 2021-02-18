@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table head renders 1`] = `
+<thead>
+  <tr>
+    <th>
+      Name
+    </th>
+    <th>
+      Team
+    </th>
+    <th>
+      Position
+    </th>
+    <th>
+      Rushing Attempts
+    </th>
+    <th>
+      Rushing Attempts / Game
+    </th>
+    <th>
+      Total Rushing Yards
+    </th>
+    <th>
+      Rushing Yards / Game
+    </th>
+    <th>
+      Rushing Yards / Attempt
+    </th>
+    <th>
+      Rushing Touchdowns
+    </th>
+    <th>
+      Longest Rush
+    </th>
+    <th>
+      Longest Rush was a touchdown
+    </th>
+    <th>
+      Rush First Downs
+    </th>
+    <th>
+      Rush First Downs %
+    </th>
+    <th>
+      Rush 20+ Yards
+    </th>
+    <th>
+      Rush 40+ Yards
+    </th>
+    <th>
+      Rush Fumbles
+    </th>
+  </tr>
+</thead>
+`;

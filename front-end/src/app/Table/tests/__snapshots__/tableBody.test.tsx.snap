@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table body renders players 1`] = `
+<table>
+  <TableBody
+    data={
+      Array [
+        Object {
+          "longestRush": 1,
+          "longestRushTouchdown": false,
+          "name": "name",
+          "position": "position",
+          "rush20Plus": 1,
+          "rush40Plus": 1,
+          "rushFirstDownPercent": 0,
+          "rushFirstDowns": 0,
+          "rushFumbles": 1,
+          "rushingAttempts": 0,
+          "rushingAttemptsPerGame": 0,
+          "rushingYardsPerAttempt": 0,
+          "rushingYardsPerGame": 0,
+          "team": "team",
+          "totalRushingTouchdowns": 0,
+          "totalRushingYards": 0,
+        },
+        Object {
+          "longestRush": 1,
+          "longestRushTouchdown": true,
+          "name": "name 2",
+          "position": "position",
+          "rush20Plus": 1,
+          "rush40Plus": 1,
+          "rushFirstDownPercent": 0,
+          "rushFirstDowns": 0,
+          "rushFumbles": 1,
+          "rushingAttempts": 0,
+          "rushingAttemptsPerGame": 0,
+          "rushingYardsPerAttempt": 0,
+          "rushingYardsPerGame": 0,
+          "team": "team 2",
+          "totalRushingTouchdowns": 0,
+          "totalRushingYards": 0,
+        },
+      ]
+    }
+  >
+    <tbody>
+      <TableRow
+        key="name"
+        player={
+          Object {
+            "longestRush": 1,
+            "longestRushTouchdown": false,
+            "name": "name",
+            "position": "position",
+            "rush20Plus": 1,
+            "rush40Plus": 1,
+            "rushFirstDownPercent": 0,
+            "rushFirstDowns": 0,
+            "rushFumbles": 1,
+            "rushingAttempts": 0,
+            "rushingAttemptsPerGame": 0,
+            "rushingYardsPerAttempt": 0,
+            "rushingYardsPerGame": 0,
+            "team": "team",
+            "totalRushingTouchdowns": 0,
+            "totalRushingYards": 0,
+          }
+        }
+      >
+        <tr>
+          <td>
+            name
+          </td>
+          <td>
+            team
+          </td>
+          <td>
+            position
+          </td>
+          <td>
+            0
+          </td>
+          <td>
+            0
+          </td>
+          <td>
+            0
+          </td>
+          <td>
+            0
+          </td>
+          <td>
+            0
+          </td>
+          <td>
+            0
+          </td>
+          <td>
+            1
+          </td>
+          <td>
+            ✗
+          </td>
+          <td>
+            0
+          </td>
+          <td>
+            0
+          </td>
+          <td>
+            1
+          </td>
+          <td>
+            1
+          </td>
+          <td>
+            1
+          </td>
+        </tr>
+      </TableRow>
+      <TableRow
+        key="name 2"
+        player={
+          Object {
+            "longestRush": 1,
+            "longestRushTouchdown": true,
+            "name": "name 2",
+            "position": "position",
+            "rush20Plus": 1,
+            "rush40Plus": 1,
+            "rushFirstDownPercent": 0,
+            "rushFirstDowns": 0,
+            "rushFumbles": 1,
+            "rushingAttempts": 0,
+            "rushingAttemptsPerGame": 0,
+            "rushingYardsPerAttempt": 0,
+            "rushingYardsPerGame": 0,
+            "team": "team 2",
+            "totalRushingTouchdowns": 0,
+            "totalRushingYards": 0,
+          }
+        }
+      >
+        <tr>
+          <td>
+            name 2
+          </td>
+          <td>
+            team 2
+          </td>
+          <td>
+            position
+          </td>
+          <td>
+            0
+          </td>
+          <td>
+            0
+          </td>
+          <td>
+            0
+          </td>
+          <td>
+            0
+          </td>
+          <td>
+            0
+          </td>
+          <td>
+            0
+          </td>
+          <td>
+            1
+          </td>
+          <td>
+            ✓
+          </td>
+          <td>
+            0
+          </td>
+          <td>
+            0
+          </td>
+          <td>
+            1
+          </td>
+          <td>
+            1
+          </td>
+          <td>
+            1
+          </td>
+        </tr>
+      </TableRow>
+    </tbody>
+  </TableBody>
+</table>
+`;

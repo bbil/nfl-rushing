@@ -15,9 +15,9 @@ interface SortingStateProps {
     sortDirection: SortDirection | null;
 }
 
-type SortingProps = SortingDispatchProps & SortingStateProps;
+export type SortingProps = SortingDispatchProps & SortingStateProps;
 
-const SortingComponent: React.FC<SortingProps> = props => {
+export const SortingComponent: React.FC<SortingProps> = props => {
     const [sortOption, setSortOption] = React.useState<SortOption | null>(null)
 
     const sortOptionOnChange = (event: any) => {
@@ -41,20 +41,20 @@ const SortingComponent: React.FC<SortingProps> = props => {
 
     return (
         <div>
-            <div onChange={sortOptionOnChange}>
+            <div id='sort-options' onChange={sortOptionOnChange}>
                 <input type="radio" value={SortOption.LONGEST_RUSH} name="sortOption" checked={sortOption === SortOption.LONGEST_RUSH} /> Longest Rush
                 <input type="radio" value={SortOption.TOTAL_RUSHING_TOUCHDOWNS} name="sortOption" checked={sortOption === SortOption.TOTAL_RUSHING_TOUCHDOWNS} /> Total Rushing Touchdowns
                 <input type="radio" value={SortOption.TOTAL_RUSHING_YARDS} name="sortOption" checked={sortOption === SortOption.TOTAL_RUSHING_YARDS}/> Total Rushing Yards
             </div>
 
-            <div onChange={sortDirectionOnChange}>
+            <div id='sort-directions' onChange={sortDirectionOnChange}>
                 <input type="radio" value={SortDirection.DESC} name="sortDirection" checked={sortDirection === SortDirection.DESC} /> Desc
                 <input type="radio" value={SortDirection.ASC} name="sortDirection" checked={sortDirection === SortDirection.ASC} /> Asc
             </div>
 
             {/* Ignore null; the enable buttons boolean guarantees it's good */}
-            <button disabled={!enableButtons} onClick={() => props.applySort(sortOption!, sortDirection!)}>Apply Sort</button>
-            <button onClick={clearSort}>Clear Sort</button>
+            <button id='sort-apply' disabled={!enableButtons} onClick={() => props.applySort(sortOption!, sortDirection!)}>Apply Sort</button>
+            <button id='sort-clear' onClick={clearSort}>Clear Sort</button>
         </div>
     )
 };

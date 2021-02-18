@@ -43,12 +43,8 @@ export const getCsvLink = (state: State): string => {
         obj['name_filter'] = state.rushing.nameFilter;
     }
 
-    if (state.rushing.sortDirection) {
-        obj['sort_direction'] = state.rushing.sortDirection;
-    }
-
-    if (state.rushing.sortOption) {
-        obj['sort_option'] = state.rushing.sortOption;
+    if (Object.keys(obj).length === 0) {
+        return `${BASE_URL}/nfl-rushing/csv`;
     }
 
     // @ts-ignore

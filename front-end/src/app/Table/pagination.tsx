@@ -14,9 +14,9 @@ interface PaginationDispatchProps {
     nextPage: () => void;
 }
 
-type PaginationProps = PaginationStateProps & PaginationDispatchProps;
+export type PaginationProps = PaginationStateProps & PaginationDispatchProps;
 
-const PaginationComponent: React.FC<PaginationProps> = props => {
+export const PaginationComponent: React.FC<PaginationProps> = props => {
     if (!props.hasNextPage && !props.hasPreviousPage) {
         return null;
     }

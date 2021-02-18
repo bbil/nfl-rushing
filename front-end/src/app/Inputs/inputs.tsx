@@ -5,11 +5,11 @@ import { State } from '../../redux/store';
 import { Filter } from './filter';
 import { Sorting } from './sorting';
 
-interface InputsProps {
+export interface InputsProps {
     csvLink: string;
 }
 
-const InputsComponent: React.FC<InputsProps> = props => {
+export const InputsComponent: React.FC<InputsProps> = props => {
     return (
         <div className="container-fluid">
             <div className="row">

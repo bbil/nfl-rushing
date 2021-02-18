@@ -1,0 +1,316 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sorting component calls clear sort when clear button is clicked, radio buttons no longer checked 1`] = `
+<div>
+  <div
+    id="sort-options"
+    onChange={[Function]}
+  >
+    <input
+      checked={true}
+      name="sortOption"
+      type="radio"
+      value="longest_rush"
+    />
+     Longest Rush
+    <input
+      checked={false}
+      name="sortOption"
+      type="radio"
+      value="total_rushing_touchdowns"
+    />
+     Total Rushing Touchdowns
+    <input
+      checked={false}
+      name="sortOption"
+      type="radio"
+      value="total_rushing_yards"
+    />
+     Total Rushing Yards
+  </div>
+  <div
+    id="sort-directions"
+    onChange={[Function]}
+  >
+    <input
+      checked={false}
+      name="sortDirection"
+      type="radio"
+      value="desc"
+    />
+     Desc
+    <input
+      checked={true}
+      name="sortDirection"
+      type="radio"
+      value="asc"
+    />
+     Asc
+  </div>
+  <button
+    disabled={false}
+    id="sort-apply"
+    onClick={[Function]}
+  >
+    Apply Sort
+  </button>
+  <button
+    id="sort-clear"
+    onClick={[Function]}
+  >
+    Clear Sort
+  </button>
+</div>
+`;
+
+exports[`Sorting component calls clear sort when clear button is clicked, radio buttons no longer checked 2`] = `
+<div>
+  <div
+    id="sort-options"
+    onChange={[Function]}
+  >
+    <input
+      checked={false}
+      name="sortOption"
+      type="radio"
+      value="longest_rush"
+    />
+     Longest Rush
+    <input
+      checked={false}
+      name="sortOption"
+      type="radio"
+      value="total_rushing_touchdowns"
+    />
+     Total Rushing Touchdowns
+    <input
+      checked={false}
+      name="sortOption"
+      type="radio"
+      value="total_rushing_yards"
+    />
+     Total Rushing Yards
+  </div>
+  <div
+    id="sort-directions"
+    onChange={[Function]}
+  >
+    <input
+      checked={false}
+      name="sortDirection"
+      type="radio"
+      value="desc"
+    />
+     Desc
+    <input
+      checked={false}
+      name="sortDirection"
+      type="radio"
+      value="asc"
+    />
+     Asc
+  </div>
+  <button
+    disabled={true}
+    id="sort-apply"
+    onClick={[Function]}
+  >
+    Apply Sort
+  </button>
+  <button
+    id="sort-clear"
+    onClick={[Function]}
+  >
+    Clear Sort
+  </button>
+</div>
+`;
+
+exports[`Sorting component renders default, with nothing checked 1`] = `
+<div>
+  <div
+    id="sort-options"
+    onChange={[Function]}
+  >
+    <input
+      checked={false}
+      name="sortOption"
+      type="radio"
+      value="longest_rush"
+    />
+     Longest Rush
+    <input
+      checked={false}
+      name="sortOption"
+      type="radio"
+      value="total_rushing_touchdowns"
+    />
+     Total Rushing Touchdowns
+    <input
+      checked={false}
+      name="sortOption"
+      type="radio"
+      value="total_rushing_yards"
+    />
+     Total Rushing Yards
+  </div>
+  <div
+    id="sort-directions"
+    onChange={[Function]}
+  >
+    <input
+      checked={false}
+      name="sortDirection"
+      type="radio"
+      value="desc"
+    />
+     Desc
+    <input
+      checked={false}
+      name="sortDirection"
+      type="radio"
+      value="asc"
+    />
+     Asc
+  </div>
+  <button
+    disabled={true}
+    id="sort-apply"
+    onClick={[Function]}
+  >
+    Apply Sort
+  </button>
+  <button
+    id="sort-clear"
+    onClick={[Function]}
+  >
+    Clear Sort
+  </button>
+</div>
+`;
+
+exports[`Sorting component renders with both grouops checked, button becomes enabled 1`] = `
+<div>
+  <div
+    id="sort-options"
+    onChange={[Function]}
+  >
+    <input
+      checked={true}
+      name="sortOption"
+      type="radio"
+      value="longest_rush"
+    />
+     Longest Rush
+    <input
+      checked={false}
+      name="sortOption"
+      type="radio"
+      value="total_rushing_touchdowns"
+    />
+     Total Rushing Touchdowns
+    <input
+      checked={false}
+      name="sortOption"
+      type="radio"
+      value="total_rushing_yards"
+    />
+     Total Rushing Yards
+  </div>
+  <div
+    id="sort-directions"
+    onChange={[Function]}
+  >
+    <input
+      checked={false}
+      name="sortDirection"
+      type="radio"
+      value="desc"
+    />
+     Desc
+    <input
+      checked={true}
+      name="sortDirection"
+      type="radio"
+      value="asc"
+    />
+     Asc
+  </div>
+  <button
+    disabled={false}
+    id="sort-apply"
+    onClick={[Function]}
+  >
+    Apply Sort
+  </button>
+  <button
+    id="sort-clear"
+    onClick={[Function]}
+  >
+    Clear Sort
+  </button>
+</div>
+`;
+
+exports[`Sorting component renders with one group checked, button disabled 1`] = `
+<div>
+  <div
+    id="sort-options"
+    onChange={[Function]}
+  >
+    <input
+      checked={true}
+      name="sortOption"
+      type="radio"
+      value="longest_rush"
+    />
+     Longest Rush
+    <input
+      checked={false}
+      name="sortOption"
+      type="radio"
+      value="total_rushing_touchdowns"
+    />
+     Total Rushing Touchdowns
+    <input
+      checked={false}
+      name="sortOption"
+      type="radio"
+      value="total_rushing_yards"
+    />
+     Total Rushing Yards
+  </div>
+  <div
+    id="sort-directions"
+    onChange={[Function]}
+  >
+    <input
+      checked={false}
+      name="sortDirection"
+      type="radio"
+      value="desc"
+    />
+     Desc
+    <input
+      checked={false}
+      name="sortDirection"
+      type="radio"
+      value="asc"
+    />
+     Asc
+  </div>
+  <button
+    disabled={true}
+    id="sort-apply"
+    onClick={[Function]}
+  >
+    Apply Sort
+  </button>
+  <button
+    id="sort-clear"
+    onClick={[Function]}
+  >
+    Clear Sort
+  </button>
+</div>
+`;

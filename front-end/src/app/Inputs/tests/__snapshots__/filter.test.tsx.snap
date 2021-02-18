@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Filter Component calls clear filter on button click, and sets value back to empty string 1`] = `
+<div>
+  <h3>
+    Player Name Filter:
+  </h3>
+  <input
+    id="filter-input"
+    onChange={[Function]}
+    value=""
+  />
+  <button
+    disabled={true}
+    id="filter-ok"
+    onClick={[Function]}
+  >
+    OK
+  </button>
+  <button
+    id="filter-clear"
+    onClick={[Function]}
+  >
+    Clear Filter
+  </button>
+</div>
+`;
+
+exports[`Filter Component enables button after input 1`] = `
+<div>
+  <h3>
+    Player Name Filter:
+  </h3>
+  <input
+    id="filter-input"
+    onChange={[Function]}
+    value="new value"
+  />
+  <button
+    disabled={false}
+    id="filter-ok"
+    onClick={[Function]}
+  >
+    OK
+  </button>
+  <button
+    id="filter-clear"
+    onClick={[Function]}
+  >
+    Clear Filter
+  </button>
+</div>
+`;
+
+exports[`Filter Component renders default; no value, and button disabled 1`] = `
+<div>
+  <h3>
+    Player Name Filter:
+  </h3>
+  <input
+    id="filter-input"
+    onChange={[Function]}
+    value=""
+  />
+  <button
+    disabled={true}
+    id="filter-ok"
+    onClick={[Function]}
+  >
+    OK
+  </button>
+  <button
+    id="filter-clear"
+    onClick={[Function]}
+  >
+    Clear Filter
+  </button>
+</div>
+`;
